@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :image
+
   enum gender: { man: 1, woman: 2, child: 3 }
   enum foot_width: { narrow: 1, nomal: 2, wide: 3 }
 
