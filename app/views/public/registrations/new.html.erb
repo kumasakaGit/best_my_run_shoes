@@ -1,28 +1,62 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_with model: @user, url: user_registration_path, local: true do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :"ニックネーム" %><br />
+    <%= f.text_field :nick_name, autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.radio_button :gender,User.genders.key(1) %>
+    <%= f.label :gender_man, User.genders_i18n[:man] %>
+  </div>
+  <div class="field">
+    <%= f.radio_button :gender,User.genders.key(2) %>
+    <%= f.label :gender_woman, User.genders_i18n[:woman] %>
+  </div>
+  <div class="field">
+    <%= f.radio_button :gender,User.genders.key(3) %>
+    <%= f.label :gender_child, User.genders_i18n[:child] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :"足のサイズ" %><br />
+    <%= f.text_field :foot_size %><em>cm</em>
+  </div>
+  <div class="field">
+    <%= f.radio_button :foot_width,User.foot_widths.key(1) %>
+    <%= f.label :foot_width_narrow, User.foot_widths_i18n[:narrow] %>
+  </div>
+  <div class="field">
+    <%= f.radio_button :foot_width,User.foot_widths.key(2) %>
+    <%= f.label :foot_width_nomal, User.foot_widths_i18n[:nomal] %>
+  </div>
+  <div class="field">
+    <%= f.radio_button :foot_width,User.foot_widths.key(3) %>
+    <%= f.label :foot_width_wide, User.foot_widths_i18n[:wide] %>
+  </div>
+  <div class="field">
+    <%= f.label :"メールアドレス" %>
+    <%= f.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :"パスワード" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :"パスワード(確認用)" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録" %>
   </div>
 <% end %>
 

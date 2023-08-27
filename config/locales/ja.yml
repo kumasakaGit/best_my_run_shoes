@@ -1,0 +1,11 @@
+  ja:
+    enums:
+        user:
+          gender:
+            man: "男"
+            woman: "女"
+            child: "子供"
+          foot_width:
+            narrow: "狭め"
+            nomal: "普通"
+            wide: "広め"
