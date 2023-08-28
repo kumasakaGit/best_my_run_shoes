@@ -1,5 +1,5 @@
 <h2>プロフィール</h2>
-      <%= image_tag user.get_profile_image(100, 100) %>
+
       <table class="table">
         <tbody>
           <tr></tr>
@@ -7,13 +7,13 @@
             <th><%= user.nick_name %></th>
           </tr>
           <tr>
-            <th><%= user.gender %></th>
+            <th><%= user.gender_i18n %></th>
           </tr>
           <tr>
             <th><%= user.foot_size %></th>
           </tr>
           <tr>
-            <th><%= user.foot_width %></th>
+            <th><%= user.foot_width_i18n %></th>
           </tr>
         </tbody>
       </table>
