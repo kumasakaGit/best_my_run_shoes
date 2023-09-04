@@ -1,0 +1,41 @@
+<h2>プロフィール編集</h2>
+
+<%= form_with model: @user, url: public_user_path, local: true do |f| %>
+
+  <table class="table">
+    <tr>
+      <td><%= f.label :"ニックネーム" %></td>
+      <td><%= f.text_field :nick_name, autofocus: true %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :"性別" %></td>
+      <td>
+        <%= f.radio_button :gender,User.genders.key(1) %>
+        <%= f.label :gender_man, User.genders_i18n[:man] %><br>
+        <%= f.radio_button :gender,User.genders.key(2) %>
+        <%= f.label :gender_woman, User.genders_i18n[:woman] %><br>
+        <%= f.radio_button :gender,User.genders.key(3) %>
+        <%= f.label :gender_child, User.genders_i18n[:child] %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.label :"足のサイズ" %></td>
+      <td><%= f.text_field :foot_size %><em>cm</em></td>
+    </tr>
+    <tr>
+      <td><%= f.label :"足の横幅" %></td>
+      <td>
+        <%= f.radio_button :foot_width,User.foot_widths.key(1) %>
+        <%= f.label :foot_width_narrow, User.foot_widths_i18n[:narrow] %><br>
+        <%= f.radio_button :foot_width,User.foot_widths.key(2) %>
+        <%= f.label :foot_width_nomal, User.foot_widths_i18n[:nomal] %><br>
+        <%= f.radio_button :foot_width,User.foot_widths.key(3) %>
+        <%= f.label :foot_width_wide, User.foot_widths_i18n[:wide] %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.submit "編集" %></td>
+    </tr>
+  </table>
+
+<% end %>

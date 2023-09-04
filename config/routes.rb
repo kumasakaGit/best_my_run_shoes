@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'users/index'
+    get 'users/show'
+  end
   root to: "public/homes#top"
 
   devise_scope :user do

@@ -1,0 +1,29 @@
+<h2>会員一覧</h2>
+  <table class="table table-borderless">
+        <thead class="thead-light">
+          <tr>
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td>
+              <%= link_to admin_user_path(user.id), class: "text-dark" do %>
+              <%= user.nick_name %>
+              <% end %>
+            </td>
+            <td><%= user.email %></td>
+            <% if user.is_deleted == "active" %>
+              <td class="text-success"><%= user.is_deleted_i18n %></td>
+            <% else %>
+              <td class="text-secondary"><%= user.is_deleted_i18n %></td>
+            <% end %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>

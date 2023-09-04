@@ -9,3 +9,6 @@
             narrow: "狭め"
             nomal: "普通"
             wide: "広め"
+          is_deleted:
+            active: "有効"
+            unsubscribe: "退会"
