@@ -42,6 +42,25 @@
                     <span>Log out</span>
                   <% end %>
                 </li>
+              <% elsif admin_signed_in? %>
+                <li class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                </li>
+                <li class="nav-item">
+                  <i class="fas fa-book-open"></i>
+                    <span>Books</span>
+                </li>
+                <li class="nav-item">
+                  <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-white" do %>
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log out</span>
+                  <% end %>
+                </li>
               <% else %>
                 <li class="nav-item">
                   <%= link_to root_path, class: "nav-link text-white" do %>

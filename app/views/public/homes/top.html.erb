@@ -2,12 +2,14 @@
 <h1>BestMyRunShoes</h1>
 <h3>~　ベスト　マイ　ラン　シューズ　~</h3>
 <p>自分の最高のランニングシューズを見つけるために作られたサイトです<br>
-    自分の経験で合ったシューズ、合わなかったシューズを投稿し、<br>
-    皆で自分に合ったシューズを探しましょう！
+   自分の経験で合ったシューズ、合わなかったシューズを投稿し、<br>
+   皆で自分に合ったシューズを探しましょう！
 </p>
 <% if user_signed_in? %>
-    <%= link_to 'みんなのレビューを見る', public_users_path %>
-    <%= link_to 'マイページ', public_user_path(current_user.id) %>
+  <%= link_to 'みんなのレビューを見る', public_users_path %>
+  <%= link_to 'マイページ', public_user_path(current_user.id) %>
+<% elsif admin_signed_in? %>
+  <%= link_to '会員一覧', admin_users_path %>
 <% else %>
-    <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
+<%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
 <% end %>

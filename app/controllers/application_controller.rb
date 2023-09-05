@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
       if user_signed_in?
         root_path(resource)
       elsif admin_signed_in?
-        admin_root_path(resource)
+        root_path(resource)
       end
     end
 
