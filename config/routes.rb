@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  
+
   root to: "public/homes#top"
-  
+
   namespace :public do
     resources :users, only: [:index, :show, :edit, :update]
+    get 'shoes/search'
   end
-  
+
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update]
   end

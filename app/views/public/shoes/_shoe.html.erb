@@ -1,0 +1,7 @@
+<% @shoes.first(10).each do |shoe| %>
+<div class="list-group">
+ <%= image_tag (shoe['smallImageUrls'][0]) %>
+ <%= link_to shoe.name, "#{shoe.url}" %>
+ <%= number_with_delimiter(shoe.price) %>円
+</div>
+<% end %>

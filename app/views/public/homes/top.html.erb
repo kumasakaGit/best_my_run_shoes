@@ -8,6 +8,7 @@
 <% if user_signed_in? %>
   <%= link_to 'みんなのレビューを見る', public_users_path %>
   <%= link_to 'マイページ', public_user_path(current_user.id) %>
+  <%= link_to '検索', public_shoes_search_path %>
 <% elsif admin_signed_in? %>
   <%= link_to '会員一覧', admin_users_path %>
 <% else %>
