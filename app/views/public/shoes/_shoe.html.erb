@@ -1,7 +1,7 @@
 <% @shoes.first(10).each do |shoe| %>
-<div class="list-group">
- <%= image_tag (shoe['smallImageUrls'][0]) %>
- <%= link_to shoe.name, "#{shoe.url}" %>
- <%= number_with_delimiter(shoe.price) %>円
-</div>
+  <div class="list-group">
+    <%= link_to public_user_path(current_user.id) do %>
+      <%= image_tag (shoe['smallImageUrls'][0]) %>
+    <% end %>
+  </div>
 <% end %>

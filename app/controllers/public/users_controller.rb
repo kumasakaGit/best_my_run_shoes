@@ -1,5 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :ensure_normal_user, only: [:edit, :update, :destroy]
+
   def show
     @user = User.find(params[:id])
   end
@@ -10,11 +12,13 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
+    ensure_normal_user
     is_matching_login_user
     @user = User.find(params[:id])
   end
 
   def update
+    ensure_normal_user
     is_matching_login_user
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -36,4 +40,12 @@ class Public::UsersController < ApplicationController
         redirect_to public_user_path(current_user.id)
       end
     end
+
+  def ensure_normal_user
+    user = User.find(params[:id])
+    if user.email == 'guest@example.com'
+      redirect_to root_path, alert: 'ゲストユーザーの更新・削除はできません。'
+    end
+  end
+
 end
