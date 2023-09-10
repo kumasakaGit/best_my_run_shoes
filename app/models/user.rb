@@ -4,7 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:nick_name]
 
-  has_one_attached :image
+  has_one_attached :profile_image
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   enum gender: { man: 1, woman: 2, child: 3 }
   enum foot_width: { narrow: 1, nomal: 2, wide: 3 }

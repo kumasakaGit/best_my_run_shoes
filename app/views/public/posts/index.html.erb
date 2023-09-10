@@ -1,0 +1,12 @@
+<h1>index</h1>
+<% @posts.each do |post| %>
+  <%= post.created_at.strftime('%Y/%m/%d') %>
+  <%= link_to public_user_path(user.id), class: "text-dark" do %>
+    <%= post.user.nick_name %>
+  <% end %>
+  <%= link_to public_post_path(post.id), class: "text-dark" do %>
+    <%= post.name %>
+  <% end %>
+  <%= post.evaluation %>
+  <%= link_to "投稿詳細" public_post_path(post.id) %>
+<% end %>

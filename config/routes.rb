@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   namespace :public do
     resources :users, only: [:index, :show, :edit, :update]
     get 'shoes/search'
+    resources :shoes, only: [:new, :index, :show, :create, :edit, :update, :destroy]
+    resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
+      resources :comments, only: [:create]
+      resources :favorites, only: [:create, :destroy]
+    end
   end
 
   namespace :admin do

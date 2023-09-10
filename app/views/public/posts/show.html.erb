@@ -1,0 +1,14 @@
+<h1>詳細</h1>
+<%= @post.image %>
+<%= @post.name %>
+<%= @post.evaluation %>
+<%= @post.comment %>
+<% if @post.favorite?(current_user) %>
+    <%= link_to post_favorite_path(@post.id), method: :delete do %>
+        <span style="color:red;">❤︎</span>
+    <% end %>
+<% else %>
+    <%= link_to post_favorites_path(@post.id), method: :post do %>
+        <span>❤︎</span>
+    <% end %>
+<% end %>

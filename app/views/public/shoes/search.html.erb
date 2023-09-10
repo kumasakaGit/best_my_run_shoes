@@ -1,4 +1,4 @@
-<h1>製品名を入力して検索</h1>
+<h1>シューズ名を入力して検索</h1>
 <div class="search-box">
     <%= form_with model: @shoe, url: public_shoes_search_path, method: :get, local: true do |f| %>
     <div class="form-group">
@@ -7,6 +7,14 @@
     </div>
     <% end %>
 <% if @shoes.present? %>
-  <%= render 'shoe' %>
+    <% @shoes.first(10).each do |shoe| %>
+        <div class="list-group">
+            <%= form_with model: @post, url: new_public_post_path, method: :get, local: true do |f| %>
+                <%= f.hidden_field :image, :value => shoe['mediumImageUrls'] %>
+                <%= image_submit_tag(shoe['mediumImageUrls'][0], class: 'search-icon') %>
+                <%= f.submit "このシューズを投稿する", class: "btn btn-success ml-5" %>
+            <% end %>
+        </div>
+    <% end %>
 <% end %>
 </div>

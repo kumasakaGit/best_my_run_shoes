@@ -1,0 +1,10 @@
+<h1>new</h1>
+<%= form_with model: @post, url: public_user_path(current_user.id), local: true do |f| %>
+    <%= f.label :"シューズ名"%>
+    <%= f.text_field :name, autofocus: true %>
+    <%= f.label :"評価コメント"%>
+    <%= f.text_area :comment %>
+    <%= f.label :"評価"%>
+    
+    <%= f.submit "投稿" %>
+<% end %>
