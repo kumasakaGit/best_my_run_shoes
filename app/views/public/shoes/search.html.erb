@@ -9,11 +9,8 @@
 <% if @shoes.present? %>
     <% @shoes.first(10).each do |shoe| %>
         <div class="list-group">
-            <%= form_with model: @post, url: new_public_post_path, method: :get, local: true do |f| %>
-                <%= f.hidden_field :image, :value => shoe['mediumImageUrls'] %>
-                <%= image_submit_tag(shoe['mediumImageUrls'][0], class: 'search-icon') %>
-                <%= f.submit "このシューズを投稿する", class: "btn btn-success ml-5" %>
-            <% end %>
+            <%= image_tag(shoe['mediumImageUrls'][0]) %>
+            <%= link_to "このシューズを投稿する", new_public_post_path(image_url: shoe['mediumImageUrls'][0]), class: "btn btn-success ml-5" %>
         </div>
     <% end %>
 <% end %>

@@ -1,12 +1,26 @@
 <h1>index</h1>
 <% @posts.each do |post| %>
   <%= post.created_at.strftime('%Y/%m/%d') %>
-  <%= link_to public_user_path(user.id), class: "text-dark" do %>
+  <%= link_to public_user_path(post.user.id), class: "text-dark" do %>
     <%= post.user.nick_name %>
   <% end %>
   <%= link_to public_post_path(post.id), class: "text-dark" do %>
     <%= post.name %>
   <% end %>
+  <p>評価:</P>
+  <div id="post_raty"></div>
   <%= post.evaluation %>
-  <%= link_to "投稿詳細" public_post_path(post.id) %>
+  <%= link_to "投稿詳細", public_post_path(post.id) %>
 <% end %>
+<script>
+var elem = document.getElementById('post_raty');
+var opt = {
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    half: true,
+    scoreName: 'post[evaluation]',
+    readOnly: true,
+  };
+  raty(elem,opt);
+</script>

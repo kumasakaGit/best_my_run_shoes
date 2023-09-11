@@ -4,6 +4,7 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @image_url = params[:image_url]
   end
 
   def index
@@ -18,11 +19,12 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @user = @post.user
+    @post.user = current_user
     if @post.save
       flash[:notice] = "投稿しました！"
       redirect_to public_user_path(current_user.id)
     else
+      puts @post.errors.full_messages.to_sentence
       flash[:notice] = "投稿エラーが起きました"
       redirect_to public_user_path(current_user.id)
     end
@@ -53,7 +55,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name, :comment, :evaluation, :image)
+    params.require(:post).permit(:name, :comment, :evaluation)
   end
 
   def is_matching_login_user
