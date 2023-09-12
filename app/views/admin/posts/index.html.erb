@@ -4,12 +4,12 @@
   <tr>
     <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
     <td>
-      <%= link_to public_user_path(post.user.id), class: "text-dark" do %>
+      <%= link_to admin_user_path(post.user.id), class: "text-dark" do %>
         <%= post.user.nick_name %>
       <% end %>
     </td>
     <td>
-      <%= link_to public_post_path(post.id), class: "text-dark" do %>
+      <%= link_to admin_post_path(post.id), class: "text-dark" do %>
         <%= post.name %>
       <% end %>
     </td>
@@ -32,7 +32,7 @@
       </script>
     </td>
     <td><%= post.evaluation %></td>
-    <td><%= link_to "詳細", public_post_path(post.id) %></td>
+    <td><%= link_to "詳細", admin_post_path(post.id) %></td>
   </tr>
 </table>
 <% end %>

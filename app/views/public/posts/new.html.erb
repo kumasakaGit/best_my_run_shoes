@@ -1,7 +1,7 @@
 <h1>new</h1>
 <%= image_tag @image_url %>
 <%= form_with model: @post, url: public_posts_path, local: true do |f| %>
-    <%= f.hidden_field :image_url, :value => @image_url %>
+    <%= f.hidden_field :photo_image_url, :value => @image_url %>
     <%= f.label :"シューズ名"%>
     <%= f.text_field :name, autofocus: true %>
     <%= f.label :"評価コメント"%>

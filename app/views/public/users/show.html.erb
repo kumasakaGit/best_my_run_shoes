@@ -3,9 +3,44 @@
 </div>
 <h1>シューズ名を入力して検索</h1>
 <div class="search-box">
-    <%= form_with model: @shoe, url: public_shoes_search_path, method: :get, local: true do |f| %>
+  <%= form_with model: @shoe, url: public_shoes_search_path, method: :get, local: true do |f| %>
     <div class="form-group">
-        <%= f.text_field :keyword, value: params[:keyword], class: "form-control" %>
-        <%= f.submit '製品名を検索', class: "form-control btn btn-success" %>
+      <%= f.text_field :keyword, value: params[:keyword], class: "form-control" %>
+      <%= f.submit '製品名を検索', class: "form-control btn btn-success" %>
     </div>
-    <% end %>
+  <% end %>
+</div>
+<h1><%= @user.nick_name %>さんの投稿一覧</h1>
+<% if @posts.present? %>
+  <% @posts.each do |post| %>
+    <table>
+      <tr>
+        <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+        <td>
+          <%= link_to public_post_path(post.id), class: "text-dark" do %>
+            <%= post.name %>
+          <% end %>
+        </td>
+        <td><p>評価:</p></td>
+        <td>
+          <div id="post_raty-<%= post.id %>"></div>
+          <script>
+            var elem = document.getElementById('post_raty-<%= post.id %>');
+            var opt = {
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            half: true,
+            score: <%= post.evaluation %>,
+            readOnly: true,
+            };
+            raty(elem,opt);
+          </script>
+        </td>
+        <td><%= post.evaluation %></td>
+        <td><%= link_to "詳細", public_post_path(post.id) %></td>
+      </tr>
+    </table>
+
+  <% end %>
+<% end %>
