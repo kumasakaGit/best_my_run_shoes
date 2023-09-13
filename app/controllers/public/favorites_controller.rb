@@ -1,16 +1,16 @@
 class Public::FavoritesController < ApplicationController
 
   def create
-    @post = Post.find(params[:post_id])
-    @favorite = current_user.favorites.new(post_id: @post.id)
+    @shoe = Shoe.find(params[:shoe_id])
+    @favorite = current_user.favorites.new(shoe_id: @shoe.id)
     @favorite.save
-    redirect_to public_post_path(@post.id)
+    redirect_to public_shoe_path(@shoe.id)
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
-    @favorite = current_user.favorites.find_by(post_id: @post.id)
+    @shoe = Shoe.find(params[:shoe_id])
+    @favorite = current_user.favorites.find_by(shoe_id: @shoe.id)
     @favorite.destroy
-    redirect_to public_post_path(@post.id)
+    redirect_to public_shoe_path(@shoe.id)
   end
 end

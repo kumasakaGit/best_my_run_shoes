@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= f.label :"足のサイズ" %><br />
-    <%= f.text_field :foot_size %><em>cm</em>
+    <%= f.number_field :foot_size, in: 18..29, step: "0.5" %><em>cm</em>
   </div>
   <div class="field">
     <%= f.radio_button :foot_width,User.foot_widths.key(1) %>
@@ -37,6 +37,7 @@
     <%= f.radio_button :foot_width,User.foot_widths.key(3) %>
     <%= f.label :foot_width_wide, User.foot_widths_i18n[:wide] %>
   </div>
+
   <div class="field">
     <%= f.label :"メールアドレス" %>
     <%= f.email_field :email, autocomplete: "email" %>

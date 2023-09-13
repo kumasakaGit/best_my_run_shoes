@@ -2,8 +2,8 @@
 
 <%= form_with model: @user, url: user_session_path, local: true do |f| %>
   <div class="field">
-    <%= f.label :"ニックネーム" %><br />
-    <%= f.text_field :nick_name, autofocus: true %>
+    <%= f.label :"メールアドレス" %><br />
+    <%= f.text_field :email, autofocus: true %>
   </div>
 
   <div class="field">

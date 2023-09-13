@@ -1,0 +1,71 @@
+<h1>詳細</h1>
+<%= image_tag @shoe.photo_image_url, size: '200x200' %>
+<table>
+  <tr>
+    <td><%= @shoe.name %></td>
+  </tr>
+  <tr>
+    <td>
+      <p>評価:<%= @shoe.evaluation %></P>
+      <div id="post_raty"></div>
+      <script>
+        var elem = document.getElementById('post_raty');
+        var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        half: true,
+        score: <%= @shoe.evaluation %>,
+        readOnly: true,
+        };
+        raty(elem,opt);
+      </script>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><%= @shoe.comment %></td>
+  </tr>
+  <tr>
+    <td>
+      <% if @shoe.favorited_by?(current_user) %>
+        <p>
+          <%= link_to public_shoe_favorites_path(@shoe), method: :delete do %>
+            ♥<%= @shoe.favorites.count %> いいね
+          <% end %>
+        </p>
+        <% else %>
+        <p>
+          <%= link_to public_shoe_favorites_path(@shoe), method: :post do %>
+            ♡<%= @shoe.favorites.count %> いいね
+          <% end %>
+        </p>
+      <% end %>
+    </td>
+    <% if @shoe.user == current_user %>
+      <td>
+        <%= link_to "投稿を編集する", edit_public_shoe_path(@shoe) %>
+      </td>
+      <td>
+        <%= link_to "削除", public_shoe_path(@shoe), method: :delete %>
+      </td>
+    <% end %>
+  </tr>
+</table>
+<div>
+  <p>コメント件数：<%= @shoe.comments.count %></p>
+  <% @shoe.comments.each do |comment| %>
+
+    <%= comment.user.nick_name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment_content %>
+    <% if comment.user == current_user %>
+      <%= link_to "削除", public_shoe_comment_path(comment.shoe, comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@shoe, @comment], url: public_shoe_comments_path(@shoe.id) do |f| %>
+    <%= f.text_area :comment_content, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

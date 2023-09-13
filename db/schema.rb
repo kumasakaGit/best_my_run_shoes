@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_12_101226) do
+ActiveRecord::Schema.define(version: 2023_09_10_033742) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -53,32 +53,26 @@ ActiveRecord::Schema.define(version: 2023_09_12_101226) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "comment_content"
+    t.text "comment_content"
     t.integer "user_id"
-    t.integer "post_id"
+    t.integer "shoe_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "post_id"
+    t.integer "shoe_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "shoes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name", null: false
     t.text "comment", null: false
     t.float "evaluation", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "photo_image_url"
-  end
-
-  create_table "shoes", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "photo_image_url", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

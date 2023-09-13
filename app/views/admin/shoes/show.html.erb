@@ -1,12 +1,12 @@
 <h1>詳細</h1>
-<%= image_tag @post.photo_image_url, size: '200x200' %>
+<%= image_tag @shoe.photo_image_url, size: '200x200' %>
 <table>
   <tr>
-    <td><%= @post.name %></td>
+    <td><%= @shoe.name %></td>
   </tr>
   <tr>
     <td>
-      <p>評価:<%= @post.evaluation %></P>
+      <p>評価:<%= @shoe.evaluation %></P>
       <div id="post_raty"></div>
       <script>
         var elem = document.getElementById('post_raty');
@@ -15,7 +15,7 @@
         starOff: "<%= asset_path('star-off.png') %>",
         starHalf: "<%= asset_path('star-half.png') %>",
         half: true,
-        score: <%= @post.evaluation %>,
+        score: <%= @shoe.evaluation %>,
         readOnly: true,
         };
         raty(elem,opt);
@@ -24,11 +24,11 @@
     <td></td>
   </tr>
   <tr>
-    <td><%= @post.comment %></td>
+    <td><%= @shoe.comment %></td>
   </tr>
   <tr>
     <td>
-      ♥<%= @post.favorites.count %> いいね
+      ♥<%= @shoe.favorites.count %> いいね
     </td>
   </tr>
 </table>

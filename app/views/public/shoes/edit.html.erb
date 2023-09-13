@@ -1,6 +1,6 @@
 <h1>投稿編集</h1>
-<%= image_tag @post.photo_image_url %>
-<%= form_with model: @post, url: public_post_path(@post.id), local: true do |f| %>
+<%= image_tag @shoe.photo_image_url %>
+<%= form_with model: @shoe, url: public_shoe_path(@shoe.id), local: true do |f| %>
     <%= f.label :"シューズ名"%>
     <%= f.text_field :name, autofocus: true %>
     <%= f.label :"評価コメント"%>
@@ -17,7 +17,8 @@ var opt = {
     starOff: "<%= asset_path('star-off.png') %>",
     starHalf: "<%= asset_path('star-half.png') %>",
     half: true,
-    scoreName: 'post[evaluation]',
+    score: <%= @shoe.evaluation %>,
+    scoreName: 'shoe[evaluation]',
   };
   raty(elem,opt);
 </script>
