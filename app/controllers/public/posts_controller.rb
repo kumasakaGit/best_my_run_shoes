@@ -40,7 +40,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.update(post_params)
       flash[:notice] = "投稿の編集が完了しました！"
-      redirect_to public_user_path(current_user.id)
+      redirect_to public_post_path(@post)
     else
       render :edit
     end
@@ -59,8 +59,8 @@ class Public::PostsController < ApplicationController
   end
 
   def is_matching_login_user
-    user = User(params[:id])
-    unless user.id == current_user.id
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
       redirect_to public_user_path(current_user.id)
     end
   end

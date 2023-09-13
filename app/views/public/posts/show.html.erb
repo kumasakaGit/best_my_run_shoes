@@ -42,5 +42,30 @@
         </p>
       <% end %>
     </td>
+    <% if @post.user == current_user %>
+      <td>
+        <%= link_to "投稿を編集する", edit_public_post_path(@post) %>
+      </td>
+      <td>
+        <%= link_to "削除", public_post_path(@post), method: :delete %>
+      </td>
+    <% end %>
   </tr>
 </table>
+<div>
+  <p>コメント件数：<%= @post.comments.count %></p>
+  <% @post.comments.each do |comment| %>
+    <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment_content %>
+    <% if comment.user == current_user %>
+      <%= link_to "削除", public_post_comment_path(comment.post, comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@post, @comment], url: public_post_comments_path do |f| %>
+    <%= f.text_area :comment_content, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

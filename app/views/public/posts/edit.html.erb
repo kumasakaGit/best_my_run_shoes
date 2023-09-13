@@ -1,2 +1,23 @@
-<h1>Public::Posts#edit</h1>
-<p>Find me in app/views/public/posts/edit.html.erb</p>
+<h1>投稿編集</h1>
+<%= image_tag @post.photo_image_url %>
+<%= form_with model: @post, url: public_post_path(@post.id), local: true do |f| %>
+    <%= f.label :"シューズ名"%>
+    <%= f.text_field :name, autofocus: true %>
+    <%= f.label :"評価コメント"%>
+    <%= f.text_area :comment %>
+    <%= f.label :evaluation,'評価', class:'star-title' %>
+    <div id='post_raty'></div>
+    <%= f.submit "投稿" %>
+<% end %>
+
+<script>
+var elem = document.getElementById('post_raty');
+var opt = {
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    half: true,
+    scoreName: 'post[evaluation]',
+  };
+  raty(elem,opt);
+</script>

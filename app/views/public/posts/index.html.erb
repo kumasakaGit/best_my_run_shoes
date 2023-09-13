@@ -32,6 +32,7 @@
       </script>
     </td>
     <td><%= post.evaluation %></td>
+    <td><%= post.comments.count %>コメント</td>
     <td><%= link_to "詳細", public_post_path(post.id) %></td>
   </tr>
 </table>
