@@ -6,6 +6,9 @@ class Admin::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @shoes = Shoe.where(user_id:params[:id])
+    @range = params[:range]
+    @shoe = Shoe.looks(params[:search], params[:word])
+    @users = User.looks(params[:search], params[:word])
   end
 
   def edit

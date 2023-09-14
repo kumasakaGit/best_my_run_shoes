@@ -4,7 +4,19 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @shoes = Shoe.where(user_id:params[:id])
+    if params[:latest]
+      @shoes = Shoe.latest
+    elsif params[:old]
+      @shoes = Shoe.old
+    else
+      @shoes = Shoe.where(user_id:params[:id])
+    end
+    if params[:keyword]
+      @posts = @posts.search(params[:keyword])
+    else
+      @shoes = Shoe.where(user_id:params[:id])
+    end
+    @keyword = params[:keyword]
   end
 
   def edit

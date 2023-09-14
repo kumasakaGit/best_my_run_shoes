@@ -10,8 +10,11 @@
     </div>
   <% end %>
 </div>
-<h1><%= @user.nick_name %>さんの投稿一覧</h1>
 <% if @shoes.present? %>
+<h1><%= @user.nick_name %>さんの投稿一覧</h1>
+<%= link_to '新着順', public_user_path(latest: "true") %>
+<%= link_to '古い順', public_user_path(old: "true") %>
+  <%= render "searches/search" %>
   <% @shoes.each do |shoe| %>
     <table>
       <tr>

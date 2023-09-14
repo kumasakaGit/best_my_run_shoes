@@ -1,0 +1,12 @@
+  <h2>Results index</h2>
+
+<table class="table table-hover table-inverse">
+    <tbody>
+      <% @shoes.each do |shoe| %>
+        <tr>
+          <td><%= shoe.name %></td>
+          <td><%= shoe.comment %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get 'shoes/show'
   end
   root to: "public/homes#top"
+  get "search" => "searches#search"
 
   namespace :public do
     resources :users, only: [:show, :edit, :update]
