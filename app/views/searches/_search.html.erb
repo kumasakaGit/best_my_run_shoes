@@ -1,7 +1,13 @@
-  <div class="search_form">
-    <%= form_with url: search_path, local: true, method: :get do |f| %>
-      <%= f.text_field :word, value: params[:word], class: "form-control" %>
-      <%= f.submit "検索", class: "btn btn-primary" %>
-    <% end %>
+  <div class="d-flex justify-content-end">
+  <%= form_with url: search_path, local: true, method: :get do |f| %>
+    <div class="input-group">
+      <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "キーワードを入力" %>
+        <span class="input-group-btn input-group-append">
+          <%= button_tag type: "submit", class: "btn btn-secondary search-btn" do %>
+            <i class="fas fa-search"></i> 絞り込み</submit>
+          <% end %>
+        </span>
+    </div>
+  <% end %>
   </div>
 

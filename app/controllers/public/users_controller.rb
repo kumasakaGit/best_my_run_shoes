@@ -11,12 +11,7 @@ class Public::UsersController < ApplicationController
     else
       @shoes = Shoe.where(user_id:params[:id])
     end
-    if params[:keyword]
-      @posts = @posts.search(params[:keyword])
-    else
-      @shoes = Shoe.where(user_id:params[:id])
-    end
-    @keyword = params[:keyword]
+    
   end
 
   def edit

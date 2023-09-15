@@ -1,13 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class=" mx-auto mt-5 mb-3">
+      <div class="mb-3 top_image">
+        <div class="bg-white top_text text-center py-3">
+                <%= image_tag 'run.jpg', size: "900x400" %>
+          <h1 class=" font-italic">BestMyShoes</h1>
+          <h4>~　ベスト　マイ　シューズ　~</h3>
+          <p>自分の最高のランニングシューズを見つけるために作られたサイトです<br>
+             自分の経験で合ったシューズ、合わなかったシューズを投稿し、<br>
+             皆で自分に合ったシューズを探しましょう！
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h1>BestMyRunShoes</h1>
-<h3>~　ベスト　マイ　ラン　シューズ　~</h3>
-<p>自分の最高のランニングシューズを見つけるために作られたサイトです<br>
-   自分の経験で合ったシューズ、合わなかったシューズを投稿し、<br>
-   皆で自分に合ったシューズを探しましょう！
-</p>
 <% if user_signed_in? %>
   <%= link_to 'マイページ', public_user_path(current_user.id) %>
   <%= link_to 'レビュー', public_shoes_path %>
+  <%= link_to 'ランキング', rank_path %>
 <% elsif admin_signed_in? %>
   <%= link_to '会員一覧', admin_users_path %>
 <% else %>

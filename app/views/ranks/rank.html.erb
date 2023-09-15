@@ -1,0 +1,49 @@
+<% last_like = 0 %>
+<!--jを定義して1を代入-->
+<% j = 1 %>
+<table>
+  <% @shoe_favorite_ranks.each.with_index(1) do |rank, i| %>
+  <% if i == 1 %>
+  <tr>
+    <td><%= image_tag("ranking-crown-no1.png", size: "100x80") %><%= i %>位</td>
+    <td><%= rank.name %></td>
+    <td><%= rank.favorites.count %></td>
+  </tr>
+  <% elsif i == 2 %>
+  <tr>
+    <td><%= image_tag("ranking-crown-no2.png", size: "100x80") %><%= i %>位</td>
+    <td><%= rank.name %></td>
+    <td><%= rank.favorites.count %></td>
+  </tr>
+  <% elsif i == 3 %>
+  <tr>
+    <td><%= image_tag("ranking-crown-no3.png", size: "100x80") %><%= i %>位</td>
+    <td><%= rank.name %></td>
+    <td><%= rank.favorites.count %></td>
+  </tr>
+  <% end %>
+  <% end %>
+  <% if i == 1 %>
+  <% last_like = rank.favorites.count %>
+<% end %>
+
+<!--rank.likes.countとlast_likeを比べて条件分岐-->
+<!--値が一致しないとき-->
+<% if rank.favorites.count != last_like %>
+  <!--値が一致しないということは次の順位を表示したいので-->
+  <!--j　に i　を代入して表示-->
+  <% j = i %>
+  第<%= j %>位
+  <p><%= rank.favorites.count %>いいね</p>
+  <!--値が一致していなのでlast_likeの値を更新-->
+  <% last_like = rank.favorites.count %>
+<% else %>
+  <!--last_likeといいねのカウント数が同じとき-->
+  <!--値は同じですが今後も使うので、代入しておく-->
+  <% last_like = rank.favorites.count %>
+  <!--jには前の順位と同じ値が入っているので、更新せずそのまま表示-->
+  第<%= j %>位
+  <p><%= rank.favorites.count %>いいね</p>
+<% end %>
+</table>
+
