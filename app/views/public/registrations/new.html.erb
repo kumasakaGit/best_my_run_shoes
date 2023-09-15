@@ -1,64 +1,63 @@
-<h2>新規登録</h2>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark bg-light py-4 mb-0">新規登録</h5>
+      <div class="form-body p-4">
+        <div class="mx-auto text-center">
+        </div>
+        <%= render "public/shared/error_messages", resource: resource %>
+        <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+            </div>
+            <%= f.text_field :nick_name, autofocus: true, class: "form-control", placeholder: "ニックネーム" %>
+          </div>
+            <p><strong>性別等</strong></p>
+            <%= f.radio_button :gender,User.genders.key(1) %>
+            <%= f.label :gender_man, User.genders_i18n[:man], class:"pr-3" %>
+            <%= f.radio_button :gender,User.genders.key(2) %>
+            <%= f.label :gender_woman, User.genders_i18n[:woman], class:"pr-3" %>
+            <%= f.radio_button :gender,User.genders.key(3) %>
+            <%= f.label :gender_child, User.genders_i18n[:child], class:"pr-3" %>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-shoe-prints"></i></i></span>
+            </div>
+            <%= f.number_field :foot_size, in: 18..29, step: "0.5", class: "form-control", placeholder: "足のサイズ(18cm以下は18,29cm以上は29)" %><p>cm</p>
+          </div>
+          <p><strong>足の横幅</strong></p>
+          <%= f.radio_button :foot_width,User.foot_widths.key(1) %>
+          <%= f.label :foot_width_narrow, User.foot_widths_i18n[:narrow], class:"pr-3" %>
+          <%= f.radio_button :foot_width,User.foot_widths.key(2) %>
+          <%= f.label :foot_width_nomal, User.foot_widths_i18n[:nomal], class:"pr-3" %>
+          <%= f.radio_button :foot_width,User.foot_widths.key(3) %>
+          <%= f.label :foot_width_wide, User.foot_widths_i18n[:wide], class:"pr-3" %>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-envelope"></i></span>
+            </div>
+            <%= f.text_field :email, class: "form-control", placeholder: "メールアドレス" %>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" aria-hidden="true"><i class="fas fa-lock"></i></span>
+            </div>
+            <% if @minimum_password_length %>
+            <%= f.password_field :password, autocomplete: "new-password", class:"form-control", placeholder:"パスワード( 6 文字以上)" %>
+            <% end %><br />
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" aria-hidden="true"><i class="fas fa-lock"></i></span>
+            </div>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder:"パスワード(確認用)" %>
+          </div>
 
-<%= form_with model: @user, url: user_registration_path, local: true do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :"ニックネーム" %><br />
-    <%= f.text_field :nick_name, autofocus: true %>
+          <%= f.submit "サインイン", class:"btn btn-lg btn-block btn-info mt-5" %>
+        <% end %>
+        <%= render "public/shared/links" %>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.radio_button :gender,User.genders.key(1) %>
-    <%= f.label :gender_man, User.genders_i18n[:man] %>
-  </div>
-  <div class="field">
-    <%= f.radio_button :gender,User.genders.key(2) %>
-    <%= f.label :gender_woman, User.genders_i18n[:woman] %>
-  </div>
-  <div class="field">
-    <%= f.radio_button :gender,User.genders.key(3) %>
-    <%= f.label :gender_child, User.genders_i18n[:child] %>
-  </div>
-
-  <div class="field">
-    <%= f.label :"足のサイズ" %><br />
-    <%= f.number_field :foot_size, in: 18..29, step: "0.5" %><em>cm</em>
-  </div>
-  <div class="field">
-    <%= f.radio_button :foot_width,User.foot_widths.key(1) %>
-    <%= f.label :foot_width_narrow, User.foot_widths_i18n[:narrow] %>
-  </div>
-  <div class="field">
-    <%= f.radio_button :foot_width,User.foot_widths.key(2) %>
-    <%= f.label :foot_width_nomal, User.foot_widths_i18n[:nomal] %>
-  </div>
-  <div class="field">
-    <%= f.radio_button :foot_width,User.foot_widths.key(3) %>
-    <%= f.label :foot_width_wide, User.foot_widths_i18n[:wide] %>
-  </div>
-
-  <div class="field">
-    <%= f.label :"メールアドレス" %>
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :"パスワード" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> 文字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :"パスワード(確認用)" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>
