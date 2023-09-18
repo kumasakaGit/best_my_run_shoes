@@ -8,10 +8,11 @@ class Public::UsersController < ApplicationController
       @shoes = Shoe.latest
     elsif params[:old]
       @shoes = Shoe.old
+    elsif params[:favorites]
+      @shoes = Shoe.favorites
     else
       @shoes = Shoe.where(user_id:params[:id])
     end
-    
   end
 
   def edit
@@ -34,7 +35,7 @@ class Public::UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:nick_name, :gender, :foot_size, :foot_width, :image)
+      params.require(:user).permit(:nick_name, :gender, :foot_size, :foot_width, :profile_image)
     end
 
     def is_matching_login_user

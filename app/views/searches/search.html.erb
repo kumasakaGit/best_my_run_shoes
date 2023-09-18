@@ -1,7 +1,16 @@
-<h1>一覧</h1>
-<%= link_to '新着順', search_path(latest: "true", keyword: params[:keyword]) %>
-<%= link_to '古い順', search_path(old: "true", keyword: params[:keyword]) %>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3 mt-5 ml-3">
+      <%= render "public/users/sidebar", user: @user %>
+    </div>
+    <div class="col-md-8 mt-5 ml-3">
 <%= render "search" %>
+<div class="d-flex justify-content-end">
+<%= link_to '新着順', search_path(latest: "true", keyword: params[:keyword]), class: "border border-primary px-3" %>
+<%= link_to '古い順', search_path(old: "true", keyword: params[:keyword]), class: "border border-primary px-3" %>
+<%= link_to 'いいねが多い順', search_path(favorites: "true"), class: "border border-primary" %>
+</div>
+
 
 <% @shoes.each do |shoe| %>
 <table>

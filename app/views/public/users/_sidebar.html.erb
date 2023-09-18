@@ -1,8 +1,11 @@
-<h2>プロフィール</h2>
-
-      <table class="table">
+      <table class="table text-center" border="2">
+        <thead>
+          <th>プロフィール</th>
+        </thead>
         <tbody>
-          <tr></tr>
+          <tr>
+            <td><%= image_tag user.get_profile_image(100,100), class: "rounded-pill" %></td>
+          </tr>
           <tr>
             <th><%= user.nick_name %></th>
           </tr>
@@ -10,14 +13,15 @@
             <th><%= user.gender_i18n %></th>
           </tr>
           <tr>
-            <th><%= user.foot_size %></th>
+            <th><span>足のサイズ：</span><%= user.foot_size %></th>
           </tr>
           <tr>
-            <th><%= user.foot_width_i18n %></th>
+            <th><span>足の横幅：</span><%= user.foot_width_i18n %></th>
           </tr>
-          <tr>
-            <th>
-              <%= link_to "編集", edit_public_user_path(user), class: "btn btn-outline-secondary btn-block" %></th>
-          </tr>
+          <% if user == current_user %>
+            <tr>
+              <td><%= link_to "編集", edit_public_user_path(user), class: "btn btn-outline-success btn-block" %></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>

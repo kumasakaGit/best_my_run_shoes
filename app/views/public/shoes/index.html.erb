@@ -1,4 +1,10 @@
-<h1>index</h1>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3 mt-5 ml-3">
+      <%= render 'public/users/sidebar', user: @user %>
+    </div>
+    <div class="col-md-8 mt-5 ml-3">
+      <h1>レビュー覧</h1>
 <% @shoes.each do |shoe| %>
 <table>
   <tr>

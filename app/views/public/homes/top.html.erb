@@ -20,7 +20,6 @@
 <% if user_signed_in? %>
   <%= link_to 'マイページ', public_user_path(current_user.id) %>
   <%= link_to 'レビュー', public_shoes_path %>
-  <%= link_to 'ランキング', rank_path %>
 <% elsif admin_signed_in? %>
   <%= link_to '会員一覧', admin_users_path %>
 <% else %>

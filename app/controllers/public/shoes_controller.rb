@@ -9,6 +9,7 @@ class Public::ShoesController < ApplicationController
 
   def index
     @shoes = Shoe.all
+    @user = current_user
   end
 
   def show

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'rank' => 'ranks#rank'
   namespace :admin do
     get 'shoes/index'
     get 'shoes/show'

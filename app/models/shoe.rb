@@ -5,6 +5,7 @@ class Shoe < ApplicationRecord
 
   scope :latest, -> { order(created_at: :desc) }
   scope :old, -> { order(created_at: :asc) }
+  scope :favorites, -> { find(Favorite.group(:shoe_id).order('count(shoe_id) desc').pluck(:shoe_id)) }
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

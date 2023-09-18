@@ -1,11 +1,12 @@
 class SearchesController < ApplicationController
-  before_action :authenticate_user!
 
   def search
     if params[:latest]
       @shoes = Shoe.latest
     elsif params[:old]
       @shoes = Shoe.old
+    elsif params[:favorites]
+      @shoes = Shoe.favorites
     else
       @shoes = Shoe.all
     end
@@ -14,5 +15,6 @@ class SearchesController < ApplicationController
       @shoes = @shoes.search(params[:keyword])
     end
     @keyword = params[:keyword]
+    @user = current_user
   end
 end

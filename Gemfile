@@ -58,3 +58,4 @@ gem 'devise'
 gem "enum_help"
 gem 'rakuten_web_service'
 gem 'jquery-rails'
+gem 'image_processing', '~> 1.2'

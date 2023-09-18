@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BestMyRunShoes</title>
+    <title>BestMyShoes</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,10 +13,10 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-info">
         <div class="container">
           <a class="navbar-brand" href="/">
-            <span>BestMyRunShoes</span>
+            <span class="font-italic">BestMyShoes</span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,40 +26,52 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li class="nav-item">
+                  <%= link_to root_path, class: "nav-link text-white" do %>
                     <i class="fas fa-home"></i>
                     <span>Home</span>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                    <i class="fas fa-users"></i>
-                    <span>Users</span>
+                  <%= link_to public_user_path(current_user.id), class: "nav-link text-white" do %>
+                    <i class="fas fa-user"></i>
+                    <span>マイページ</span>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <i class="fas fa-book-open"></i>
-                    <span>Books</span>
+                  <%= link_to public_shoes_path, class: "nav-link text-white" do %>
+                    <i class="fa-solid fa-paste"></i>
+                    <span>レビュ一覧</span>
+                  <% end %>
                 </li>
                 <li class="nav-item">
                   <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-white" do %>
                     <i class="fas fa-sign-out-alt"></i>
-                    <span>Log out</span>
+                    <span>ログアウト</span>
                   <% end %>
                 </li>
               <% elsif admin_signed_in? %>
                 <li class="nav-item">
+                  <%= link_to root_path, class: "nav-link text-white" do %>
                     <i class="fas fa-home"></i>
                     <span>Home</span>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                    <i class="fas fa-users"></i>
-                    <span>Users</span>
+                  <%= link_to admin_shoes_path, class: "nav-link text-white" do %>
+                    <i class="fa-solid fa-paste"></i>
+                    <span>レビュ一覧</span>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <i class="fas fa-book-open"></i>
-                    <span>Books</span>
+                  <%= link_to admin_users_path, class: "nav-link text-white" do %>
+                    <i class="fa-solid fa-users"></i>
+                    <span>ユーザー覧</span>
+                  <% end %>
                 </li>
                 <li class="nav-item">
                   <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-white" do %>
                     <i class="fas fa-sign-out-alt"></i>
-                    <span>Log out</span>
+                    <span>ログアウト</span>
                   <% end %>
                 </li>
               <% else %>
@@ -72,19 +84,20 @@
                 <li class="nav-item">
                   <%= link_to new_user_registration_path, class: "nav-link text-white" do %>
                     <i class="fas fa-user-plus"></i>
-                    <span>Sign up</span>
+                    <span>新規登録</span>
                   <% end %>
                 </li>
                 <li class="nav-item">
                   <%= link_to new_user_session_path, class: "nav-link text-white" do %>
                     <i class="fas fa-sign-in-alt"></i>
-                    <span>Log in</span>
+                    <span>ログイン</span>
                   <% end %>
                 </li>
               <% end %>
             </ul>
           </div>
         </div>
+        <%= render "searches/search" %>
       </nav>
     </header>
     <%= yield %>
