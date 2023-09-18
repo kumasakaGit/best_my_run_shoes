@@ -1,44 +1,60 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-3 mt-5 ml-3">
+    <div class="col-md-3 mt-5 ml-1">
       <%= render 'public/users/sidebar', user: @user %>
     </div>
     <div class="col-md-8 mt-5 ml-3">
       <h1>レビュー覧</h1>
-<% @shoes.each do |shoe| %>
-<table>
-  <tr>
-    <td><%= shoe.created_at.strftime('%Y/%m/%d') %></td>
-    <td>
-      <%= link_to public_user_path(shoe.user.id), class: "text-dark" do %>
-        <%= shoe.user.nick_name %>
-      <% end %>
-    </td>
-    <td>
-      <%= link_to public_shoe_path(shoe.id), class: "text-dark" do %>
-        <%= shoe.name %>
-      <% end %>
-    </td>
-    <td>
-      <p>評価:</p>
-    </td>
-    <td id="post_raty-<%= shoe.id %>">
-      <script>
-        var elem = document.getElementById('post_raty-<%= shoe.id %>');
-        var opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
-        half: true,
-        score: <%= shoe.evaluation %>,
-        readOnly: true,
-        };
-        raty(elem,opt);
-      </script>
-    </td>
-    <td><%= shoe.evaluation %></td>
-    <td><%= shoe.comments.count %>コメント</td>
-    <td><%= link_to "詳細", public_shoe_path(shoe.id) %></td>
-  </tr>
-</table>
-<% end %>
+      <div class="d-flex justify-content-end">
+        <%= link_to '新着順', public_shoes_path(latest: "true"), class: "border border-primary px-3" %>
+        <%= link_to '古い順', public_shoes_path(old: "true"), class: "border border-primary px-3" %>
+        <%= link_to 'いいねが多い順', public_shoes_path(favorites: "true"), class: "border border-primary px-3" %>
+      </div>
+      <table class="table text-center">
+        <thead>
+          <tr class="table-primary">
+            <th>投稿日</th>
+            <th>投稿者</th>
+            <th>シューズ名</th>
+            <th>評価</th>
+            <th>いいね数</th>
+            <th colspan="1"></th>
+          </tr>
+        </thead>
+        <% @shoes.each do |shoe| %>
+        <tbody>
+          <tr>
+            <td><%= shoe.created_at.strftime('%Y/%m/%d') %></td>
+            <td>
+              <%= link_to public_user_path(shoe.user.id), class: "text-dark" do %>
+                <%= shoe.user.nick_name %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to public_shoe_path(shoe.id), class: "text-dark" do %>
+                <%= shoe.name %>
+              <% end %>
+            </td>
+            <td id="post_raty-<%= shoe.id %>">
+              <script>
+                var elem = document.getElementById('post_raty-<%= shoe.id %>');
+                var opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                half: true,
+                score: <%= shoe.evaluation %>,
+                readOnly: true,
+                };
+                raty(elem,opt);
+              </script>
+            </td>
+            <td><%= shoe.favorites.count %>いいね</td>
+            <td><%= link_to "詳細", public_shoe_path(shoe.id) %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

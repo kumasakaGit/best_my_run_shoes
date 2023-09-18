@@ -3,8 +3,6 @@
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
       <h5 class="text-dark bg-light py-4 mb-0">新規登録</h5>
       <div class="form-body p-4">
-        <div class="mx-auto text-center">
-        </div>
         <%= render "public/shared/error_messages", resource: resource %>
         <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
           <div class="input-group mb-3">
@@ -53,7 +51,6 @@
             </div>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder:"パスワード(確認用)" %>
           </div>
-
           <%= f.submit "サインイン", class:"btn btn-lg btn-block btn-info mt-5" %>
         <% end %>
         <%= render "public/shared/links" %>

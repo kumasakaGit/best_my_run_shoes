@@ -11,7 +11,9 @@ class SearchesController < ApplicationController
       @shoes = Shoe.all
     end
 
-    if params[:keyword]
+    if params[:keyword] && @shoes.class == Array
+      @shoes = @shoes.select{|shoe| shoe.name.include?(params[:keyword]) }
+    elsif params[:keyword]
       @shoes = @shoes.search(params[:keyword])
     end
     @keyword = params[:keyword]

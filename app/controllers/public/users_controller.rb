@@ -9,7 +9,9 @@ class Public::UsersController < ApplicationController
     elsif params[:old]
       @shoes = Shoe.old
     elsif params[:favorites]
+      p "#############"
       @shoes = Shoe.favorites
+      p @shoes
     else
       @shoes = Shoe.where(user_id:params[:id])
     end

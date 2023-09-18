@@ -1,44 +1,44 @@
-<h2>プロフィール編集</h2>
-
-<%= form_with model: @user, url: public_user_path, local: true do |f| %>
-
-  <table class="table">
-    <tr>
-      <td><%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"ニックネーム" %></td>
-      <td><%= f.text_field :nick_name, autofocus: true %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"性別" %></td>
-      <td>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark bg-light py-4 mb-0">プロフィール編集</h5>
+      <div class="form-body p-4">
+        <%= form_with model: @user, url: public_user_path, local: true do |f| %>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-image-portrait"></i></span>
+          </div>
+          <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+          </div>
+          <%= f.text_field :nick_name, autofocus: true, class: "form-control", placeholder: "ニックネーム" %>
+        </div>
+        <p><strong>性別等</strong></p>
         <%= f.radio_button :gender,User.genders.key(1) %>
-        <%= f.label :gender_man, User.genders_i18n[:man] %><br>
+        <%= f.label :gender_man, User.genders_i18n[:man], class:"pr-3" %>
         <%= f.radio_button :gender,User.genders.key(2) %>
-        <%= f.label :gender_woman, User.genders_i18n[:woman] %><br>
+        <%= f.label :gender_woman, User.genders_i18n[:woman], class:"pr-3" %>
         <%= f.radio_button :gender,User.genders.key(3) %>
-        <%= f.label :gender_child, User.genders_i18n[:child] %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= f.label :"足のサイズ" %></td>
-      <td><%= f.text_field :foot_size %><em>cm</em></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"足の横幅" %></td>
-      <td>
+        <%= f.label :gender_child, User.genders_i18n[:child], class:"pr-3" %>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-shoe-prints"></i></i></span>
+          </div>
+          <%= f.number_field :foot_size, in: 18..29, step: "0.5", class: "form-control", placeholder: "足のサイズ(18cm以下は18,29cm以上は29)" %><p>cm</p>
+        </div>
+        <p><strong>足の横幅</strong></p>
         <%= f.radio_button :foot_width,User.foot_widths.key(1) %>
-        <%= f.label :foot_width_narrow, User.foot_widths_i18n[:narrow] %><br>
+        <%= f.label :foot_width_narrow, User.foot_widths_i18n[:narrow], class:"pr-3" %>
         <%= f.radio_button :foot_width,User.foot_widths.key(2) %>
-        <%= f.label :foot_width_nomal, User.foot_widths_i18n[:nomal] %><br>
+        <%= f.label :foot_width_nomal, User.foot_widths_i18n[:nomal], class:"pr-3" %>
         <%= f.radio_button :foot_width,User.foot_widths.key(3) %>
-        <%= f.label :foot_width_wide, User.foot_widths_i18n[:wide] %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= f.submit "編集" %></td>
-    </tr>
-  </table>
-
-<% end %>
+        <%= f.label :foot_width_wide, User.foot_widths_i18n[:wide], class:"pr-3" %>
+        <%= f.submit "編集", class:"btn btn-lg btn-block btn-success mt-5" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

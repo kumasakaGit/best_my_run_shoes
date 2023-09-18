@@ -5,6 +5,7 @@ class Public::ShoesController < ApplicationController
   def new
     @shoe = Shoe.new
     @image_url = params[:image_url]
+    @user = current_user
   end
 
   def index
@@ -15,6 +16,7 @@ class Public::ShoesController < ApplicationController
   def show
     @shoe = Shoe.find(params[:id])
     @comment = Comment.new
+    @user = @shoe.user
   end
 
   def create
@@ -33,6 +35,7 @@ class Public::ShoesController < ApplicationController
   def edit
     is_matching_login_user
     @shoe = Shoe.find(params[:id])
+    @user = current_user
   end
 
   def update
@@ -71,5 +74,4 @@ class Public::ShoesController < ApplicationController
       redirect_to public_user_path(current_user.id)
     end
   end
-
 end
