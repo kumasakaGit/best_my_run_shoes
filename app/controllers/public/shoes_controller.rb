@@ -9,8 +9,18 @@ class Public::ShoesController < ApplicationController
   end
 
   def index
-    @shoes = Shoe.all
     @user = current_user
+    if params[:latest]
+      @shoes = Shoe.latest
+    elsif params[:old]
+      @shoes = Shoe.old
+    elsif params[:favorites]
+      p "#############"
+      @shoes = Shoe.favorites
+      p @shoes
+    else
+      @shoes = Shoe.all
+    end
   end
 
   def show

@@ -30,7 +30,12 @@
         <% end %>
       </div>
       <h1><%= @user.nick_name %>さんの投稿一覧</h1>
-      <% if @shoes.present? %>
+        <% if @shoes.present? %>
+        <div class="d-flex justify-content-end">
+          <%= link_to '新着順', public_user_path(latest: "true", keyword: params[:keyword]), class: "border border-primary px-3" %>
+          <%= link_to '古い順', public_user_path(old: "true", keyword: params[:keyword]), class: "border border-primary px-3" %>
+          <%= link_to 'いいねが多い順', public_user_path(favorites: "true", keyword: params[:keyword]), class: "border border-primary" %>
+        </div>
         <table class="table text-center">
           <thead>
             <tr class="table-primary">

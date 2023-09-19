@@ -1,3 +1,6 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-8 mt-5 mx-auto">
 <h2>会員一覧</h2>
   <table class="table table-borderless">
         <thead class="thead-light">
@@ -18,12 +21,11 @@
               <% end %>
             </td>
             <td><%= user.email %></td>
-            <% if user.is_deleted == "active" %>
-              <td class="text-success"><%= user.is_deleted_i18n %></td>
-            <% else %>
-              <td class="text-secondary"><%= user.is_deleted_i18n %></td>
-            <% end %>
+            <td><%= link_to "詳細", admin_user_path(user.id) %></td>
           </tr>
           <% end %>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>

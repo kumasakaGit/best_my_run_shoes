@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row no-gutters">
-    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
-      <h5 class="text-dark bg-light py-4 mb-0">プロフィール編集</h5>
-      <div class="form-body p-4">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-right shadow-lg rounded px-0 my-5">
+      <h5 class="text-center text-dark bg-light py-4 mb-0">プロフィール編集</h5>
+      <div class="text-center form-body p-4">
         <%= form_with model: @user, url: public_user_path, local: true do |f| %>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -36,9 +36,10 @@
         <%= f.label :foot_width_nomal, User.foot_widths_i18n[:nomal], class:"pr-3" %>
         <%= f.radio_button :foot_width,User.foot_widths.key(3) %>
         <%= f.label :foot_width_wide, User.foot_widths_i18n[:wide], class:"pr-3" %>
-        <%= f.submit "編集", class:"btn btn-lg btn-block btn-success mt-5" %>
+        <%= f.submit "編集", class: "btn btn-lg btn-block btn-success mt-3" %>
         <% end %>
       </div>
+      <%= link_to "アカウント削除", public_user_path(@user), class: "btn btn-danger mb-2 mr-2", method: :delete, "data-confirm" => "本当に退会しますか？" %>
     </div>
   </div>
 </div>

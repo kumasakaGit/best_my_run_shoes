@@ -1,0 +1,7 @@
+ja:
+  devise:
+    registrations:
+      signed_up: "新規登録に成功しました！"
+    sessions:
+      signed_in: "ログインに成功しました"
+      signed_out: "ログアウトしました"

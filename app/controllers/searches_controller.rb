@@ -17,6 +17,5 @@ class SearchesController < ApplicationController
       @shoes = @shoes.search(params[:keyword])
     end
     @keyword = params[:keyword]
-    @user = current_user
   end
 end

@@ -3,7 +3,6 @@
     <div class=" mx-auto mt-5 mb-3">
       <div class="mb-3 top_image">
         <div class="bg-light top_text text-center">
-
           <h1 class=" font-italic">BestMyShoes</h1>
           <h4>〜　ベスト マイ シューズ　〜</h3>
           <p>自分の最高のランニングシューズを見つけるために作られたサイトです<br>
@@ -17,10 +16,7 @@
   </div>
 </div>
 
-<% if user_signed_in? %>
-  <%= link_to 'マイページ', public_user_path(current_user.id) %>
-  <%= link_to 'レビュー', public_shoes_path %>
-<% elsif admin_signed_in? %>
+<% if admin_signed_in? %>
   <%= link_to '会員一覧', admin_users_path %>
 <% else %>
 <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>

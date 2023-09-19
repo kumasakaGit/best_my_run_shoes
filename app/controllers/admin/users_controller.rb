@@ -5,10 +5,17 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @shoes = Shoe.where(user_id:params[:id])
-    @range = params[:range]
-    @shoe = Shoe.looks(params[:search], params[:word])
-    @users = User.looks(params[:search], params[:word])
+    if params[:latest]
+      @shoes = Shoe.where(user_id:params[:id]).latest
+    elsif params[:old]
+      @shoes = Shoe.where(user_id:params[:id]).old
+    elsif params[:favorites]
+      p "#############"
+      @shoes = Shoe.where(user_id:params[:id]).favorites
+      p @shoes
+    else
+      @shoes = Shoe.where(user_id:params[:id])
+    end
   end
 
   def edit

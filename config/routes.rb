@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'shoes/index'
-    get 'shoes/show'
-  end
   root to: "public/homes#top"
   get "search" => "searches#search"
 
   namespace :public do
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update, :destroy]
     get 'shoes/search'
     resources :shoes, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
       resources :comments, only: [:create, :destroy]
@@ -17,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :shoes, only: [:index, :show, :edit, :update, :destroy]
   end
 

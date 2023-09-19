@@ -5,12 +5,12 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if params[:latest]
-      @shoes = Shoe.latest
+      @shoes = Shoe.where(user_id:params[:id]).latest
     elsif params[:old]
-      @shoes = Shoe.old
+      @shoes = Shoe.where(user_id:params[:id]).old
     elsif params[:favorites]
       p "#############"
-      @shoes = Shoe.favorites
+      @shoes = Shoe.where(user_id:params[:id]).favorites
       p @shoes
     else
       @shoes = Shoe.where(user_id:params[:id])
@@ -33,6 +33,13 @@ class Public::UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
   end
 
   private
