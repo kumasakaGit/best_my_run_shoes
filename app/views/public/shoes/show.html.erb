@@ -11,6 +11,14 @@
     </div>
     <div class="col-md-5 mt-5">
       <table class="table table-borderless">
+        <% if @shoe.user == current_user %>
+          <tr>
+            <td>
+              <%= link_to "投稿編集", edit_public_shoe_path(@shoe), class: "btn btn-outline-success mx-2" %>
+              <%= link_to "削除", public_shoe_path(@shoe), method: :delete, class: "btn btn-outline-danger mx-2", "data-confirm" => "本当に削除しますか？" %>
+            </td>
+          </tr>
+        <% end %>
         <tr>
           <td><h4><%= @shoe.name %></h4></td>
         </tr>
@@ -31,7 +39,7 @@
             </script>
           </td>
         </tr>
-        <tr>
+        <tr class=" border">
           <td><%= @shoe.comment %></td>
         </tr>
         <tr>
@@ -58,11 +66,20 @@
           <td>
             <div>
               <% @shoe.comments.each do |comment| %>
-                <%= comment.user.nick_name %>
-                <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment_content %>
-                <% if comment.user == current_user %>
-                  <%= link_to "削除", public_shoe_comment_path(comment.shoe, comment), method: :delete %>
-                <% end %>
+                <table class="table">
+                  <tr>
+                    <td>
+                      <%= comment.created_at.strftime('%Y/%m/%d') %>
+                      <%= comment.user.nick_name %>
+                      <% if comment.user == current_user %>
+                        <%= link_to "削除", public_shoe_comment_path(comment.shoe, comment), method: :delete, class: "btn btn-outline-danger" %>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr class=" border">
+                    <td><%= comment.comment_content %></td>
+                  </tr>
+                </table>
               <% end %>
             </div>
             <div>
@@ -73,14 +90,7 @@
             </div>
           </td>
         </tr>
-          <% if @shoe.user == current_user %>
-          <tr>
-            <td>
-              <%= link_to "投稿編集", edit_public_shoe_path(@shoe), class: "btn btn-success mx-2" %>
-              <%= link_to "削除", public_shoe_path(@shoe), method: :delete, class: "btn btn-danger mx-2" %>
-            </td>
-          </tr>
-          <% end %>
+
       </table>
     </div>
   </div>

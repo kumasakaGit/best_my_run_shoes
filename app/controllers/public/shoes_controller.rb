@@ -1,6 +1,6 @@
 class Public::ShoesController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :create]
-  before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:new, :search]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def new
     @shoe = Shoe.new
@@ -60,6 +60,7 @@ class Public::ShoesController < ApplicationController
   end
 
   def destroy
+    is_matching_login_user
     @shoe = Shoe.find(params[:id])
     @shoe.destroy
     redirect_to public_user_path(current_user.id)

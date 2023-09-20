@@ -22,6 +22,10 @@
             <tr>
               <td><%= link_to "編集", edit_public_user_path(user), class: "btn btn-outline-success btn-block" %></td>
             </tr>
+          <% elsif admin_signed_in? %>
+            <tr>
+              <td><%= link_to "編集", edit_admin_user_path(user), class: "btn btn-outline-success btn-block" %></td>
+            </tr>
           <% end %>
         </tbody>
       </table>

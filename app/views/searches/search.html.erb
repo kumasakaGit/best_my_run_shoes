@@ -49,7 +49,12 @@
               </script>
             </td>
             <td><%= shoe.favorites.count %>いいね</td>
-            <td><%= link_to "詳細", public_shoe_path(shoe.id) %></td>
+            <% if user_signed_in? %>
+              <td><%= link_to "詳細", public_shoe_path(shoe.id) %></td>
+            <% elsif admin_signed_in? %>
+              <td><%= link_to "詳細", admin_shoe_path(shoe.id) %></td>
+            <% else %>
+            <% end %>
           </tr>
         </tbody>
         <% end %>

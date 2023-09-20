@@ -1,34 +1,73 @@
-<h1>詳細</h1>
-<%= image_tag @shoe.photo_image_url, size: '200x200' %>
-<table class="table">
-  <tr>
-    <td><%= @shoe.name %></td>
-  </tr>
-  <tr>
-    <td>
-      <p>評価:<%= @shoe.evaluation %></P>
-      <div id="post_raty"></div>
-      <script>
-        var elem = document.getElementById('post_raty');
-        var opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
-        half: true,
-        score: <%= @shoe.evaluation %>,
-        readOnly: true,
-        };
-        raty(elem,opt);
-      </script>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><%= @shoe.comment %></td>
-  </tr>
-  <tr>
-    <td>
-      ♥<%= @shoe.favorites.count %> いいね
-    </td>
-  </tr>
-</table>
+<div class="container px-3 px-sm-0">
+  <div class="row">
+    <h1 class="mx-auto mt-5">詳細</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-3 my-auto ml-3">
+      <%= render 'public/users/sidebar', user: @user %>
+    </div>
+    <div class="col-md-3 my-auto ml-4">
+      <%= image_tag @shoe.photo_image_url, size: '200x150' %>
+    </div>
+    <div class="col-md-5 mt-5">
+      <table class="table table-borderless">
+        <tr>
+          <td>
+            <%= link_to "投稿編集", edit_admin_shoe_path(@shoe), class: "btn btn-outline-success" %>
+            <%= link_to "削除", admin_shoe_path(@shoe), method: :delete, class: "btn btn-outline-danger", "data-confirm" => "本当に削除しますか？" %>
+          </td>
+        </tr>
+        <tr>
+          <td><h4><%= @shoe.name %></h4></td>
+        </tr>
+        <tr>
+          <td>
+            評価：<span id="post_raty"></span>
+            <script>
+              var elem = document.getElementById('post_raty');
+              var opt = {
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              starHalf: "<%= asset_path('star-half.png') %>",
+              half: true,
+              score: <%= @shoe.evaluation %>,
+              readOnly: true,
+              };
+              raty(elem,opt);
+            </script>
+          </td>
+        </tr>
+        <tr class=" border">
+          <td><%= @shoe.comment %></td>
+        </tr>
+        <tr>
+          <td>♥<%= @shoe.favorites.count %> いいね</td>
+        </tr>
+        <tr>
+          <td>コメント件数：<%= @shoe.comments.count %></td>
+        </tr>
+        <tr>
+          <td>
+            <div>
+              <% @shoe.comments.each do |comment| %>
+              <table class="table">
+                <tr>
+                  <td>
+                    <%= comment.created_at.strftime('%Y/%m/%d') %>
+                    <%= comment.user.nick_name %>
+                    <%= link_to "削除", admin_shoe_comment_path(comment.shoe, comment), method: :delete, class: "btn btn-outline-danger" %>
+                  </td>
+                </tr>
+                  <tr class=" border">
+                    <td><%= comment.comment_content %></td>
+                  </tr>
+              </table>
+
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

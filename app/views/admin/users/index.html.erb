@@ -8,7 +8,7 @@
             <th>会員ID</th>
             <th>氏名</th>
             <th>メールアドレス</th>
-            <th>ステータス</th>
+            <th colspan="3"></th>
           </tr>
         </thead>
         <tbody>
@@ -22,6 +22,8 @@
             </td>
             <td><%= user.email %></td>
             <td><%= link_to "詳細", admin_user_path(user.id) %></td>
+            <td><%= link_to "編集", edit_admin_user_path(user), class: "btn btn-outline-success" %></td>
+            <td><%= link_to "アカウント削除", admin_user_path(user), class: "btn btn-outline-danger", method: :delete, "data-confirm" => "本当に退会しますか？" %></td>
           </tr>
           <% end %>
         </tbody>

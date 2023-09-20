@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
   before_action :ensure_normal_user, only: [:edit, :update, :destroy]
 
   def show
@@ -28,7 +28,7 @@ class Public::UsersController < ApplicationController
     is_matching_login_user
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:notice] = "You have updated user successfully."
+      flash[:notice] = "編集完了しました"
       redirect_to public_user_path(@user.id)
     else
       render :edit
@@ -36,6 +36,8 @@ class Public::UsersController < ApplicationController
   end
 
   def destroy
+    ensure_normal_user
+    is_matching_login_user
     @user = User.find(params[:id])
     @user.destroy
     flash[:notice] = "退会処理を実行いたしました"

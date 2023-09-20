@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update, :destroy]
-    resources :shoes, only: [:index, :show, :edit, :update, :destroy]
+    resources :shoes, only: [:index, :show, :edit, :update, :destroy] do
+      resources :comments, only: [:destroy]
+    end
   end
 
   devise_scope :user do
