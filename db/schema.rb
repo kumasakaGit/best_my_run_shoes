@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_18_075233) do
+ActiveRecord::Schema.define(version: 2023_09_10_033742) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -67,18 +67,13 @@ ActiveRecord::Schema.define(version: 2023_09_18_075233) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "searches", force: :cascade do |t|
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "shoes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name", null: false
     t.text "comment", null: false
     t.float "evaluation", null: false
     t.string "photo_image_url", null: false
+    t.string "rakuten_shoes_url", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -93,7 +88,6 @@ ActiveRecord::Schema.define(version: 2023_09_18_075233) do
     t.float "foot_size", null: false
     t.integer "foot_width", null: false
     t.integer "gender", null: false
-    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

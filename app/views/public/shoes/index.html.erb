@@ -50,7 +50,7 @@
               </script>
             </td>
             <td><%= shoe.favorites.count %>いいね</td>
-            <td><%= link_to "詳細", public_shoe_path(shoe.id) %></td>
+            <td><%= link_to "詳細", public_shoe_path(shoe.id), class: "btn btn-outline-info" %></td>
           </tr>
         </tbody>
         <% end %>

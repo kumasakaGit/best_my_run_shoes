@@ -50,9 +50,9 @@
             </td>
             <td><%= shoe.favorites.count %>いいね</td>
             <% if user_signed_in? %>
-              <td><%= link_to "詳細", public_shoe_path(shoe.id) %></td>
+              <td><%= link_to "詳細", public_shoe_path(shoe.id), class: "btn btn-outline-info" %></td>
             <% elsif admin_signed_in? %>
-              <td><%= link_to "詳細", admin_shoe_path(shoe.id) %></td>
+              <td><%= link_to "詳細", admin_shoe_path(shoe.id), class: "btn btn-outline-info" %></td>
             <% else %>
             <% end %>
           </tr>

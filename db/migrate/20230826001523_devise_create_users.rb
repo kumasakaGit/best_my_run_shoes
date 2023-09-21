@@ -35,7 +35,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.float :foot_size, null: false
       t.integer :foot_width, null: false
       t.integer :gender, null: false
-      t.boolean :is_deleted, null: false, default: false
 
       t.timestamps null: false
     end

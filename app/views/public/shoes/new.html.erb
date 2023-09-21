@@ -7,6 +7,7 @@
             <h1>ランニングシューズを投稿する</h1>
             <%= form_with model: @shoe, url: public_shoes_path, local: true do |f| %>
             <%= f.hidden_field :photo_image_url, :value => @image_url %>
+            <%= f.hidden_field :rakuten_shoes_url, :value => @shoe_url %>
             <table class="table table-borderless">
                 <tr>
                     <td><%= image_tag @image_url %></td>

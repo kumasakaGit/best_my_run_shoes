@@ -6,6 +6,7 @@ class CreateShoes < ActiveRecord::Migration[6.1]
       t.text :comment, null: false
       t.float :evaluation, null: false
       t.string :photo_image_url, null: false
+      t.string :rakuten_shoes_url, null: false
       t.timestamps
     end
   end

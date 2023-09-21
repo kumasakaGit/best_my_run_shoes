@@ -1,6 +1,6 @@
 <div class="container px-5 px-sm-0">
     <div class="row">
-        <div class="col-md-8 mt-5 ml-3">
+        <div class="col-md-10 mt-5 mx-auto">
             <h1>シューズ名を入力して検索</h1>
             <div class="d-flex justify-content mx-5">
                 <%= form_with model: @shoe, url: public_shoes_search_path, method: :get, local: true do |f| %>
@@ -18,10 +18,13 @@
             <% @shoes.first(10).each do |shoe| %>
                 <table class="table table-borderless">
                     <tr>
-                        <td><%= image_tag(shoe['mediumImageUrls'][0], size: "200x200") %></td>
+                        <td>
+                            <%= image_tag(shoe['mediumImageUrls'][0], size: "200x150") %>
+                        </td>
+                        <td><%= link_to shoe.name, "#{shoe.url}" %></td>
                     </tr>
                     <tr>
-                        <td><%= link_to "このシューズを投稿する", new_public_shoe_path(image_url: shoe['mediumImageUrls'][0]), class: "btn btn-success mb-3" %></td>
+                        <td colspan="2"><%= link_to "このシューズを投稿する", new_public_shoe_path(image_url: shoe['mediumImageUrls'][0], shoe_url: shoe.url), class: "btn btn-outline-success btn-block mb-3" %></td>
                     </tr>
                 </table>
             <% end %>

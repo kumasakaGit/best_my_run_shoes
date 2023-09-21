@@ -5,6 +5,7 @@ class Public::ShoesController < ApplicationController
   def new
     @shoe = Shoe.new
     @image_url = params[:image_url]
+    @shoe_url = params[:shoe_url]
     @user = current_user
   end
 
@@ -15,9 +16,7 @@ class Public::ShoesController < ApplicationController
     elsif params[:old]
       @shoes = Shoe.old
     elsif params[:favorites]
-      p "#############"
       @shoes = Shoe.favorites
-      p @shoes
     else
       @shoes = Shoe.all
     end
@@ -27,6 +26,7 @@ class Public::ShoesController < ApplicationController
     @shoe = Shoe.find(params[:id])
     @comment = Comment.new
     @user = @shoe.user
+
   end
 
   def create
@@ -36,9 +36,8 @@ class Public::ShoesController < ApplicationController
       flash[:notice] = "投稿しました！"
       redirect_to public_user_path(current_user.id)
     else
-      puts @shoe.errors.full_messages.to_sentence
       flash[:notice] = "投稿エラーが起きました"
-      redirect_to public_user_path(current_user.id)
+      render :new
     end
   end
 
@@ -76,7 +75,7 @@ class Public::ShoesController < ApplicationController
   private
 
   def shoe_params
-    params.require(:shoe).permit(:name, :comment, :evaluation, :photo_image_url)
+    params.require(:shoe).permit(:name, :comment, :evaluation, :photo_image_url, :rakuten_shoes_url)
   end
 
   def is_matching_login_user

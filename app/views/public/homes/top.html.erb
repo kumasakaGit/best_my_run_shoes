@@ -16,8 +16,7 @@
   </div>
 </div>
 
-<% if admin_signed_in? %>
-  <%= link_to '会員一覧', admin_users_path %>
+<% if admin_signed_in? || user_signed_in? %>
 <% else %>
-<%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
+  <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
 <% end %>
