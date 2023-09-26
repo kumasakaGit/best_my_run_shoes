@@ -4,7 +4,7 @@
       <%= render 'sidebar', user: @user %>
     </div>
     <div class="col-md-8 mt-5 ml-3">
-      <h1>シューズを検索して投稿</h1>
+      <h1 class="text-success">シューズを検索して投稿</h1>
       <li class="nav-item dropdown list-unstyled float-right" style="width: 300px;">
         <p class="nav-link dropdown-toggle mr-5"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           ※投稿の仕方
@@ -18,7 +18,7 @@
         </div>
       </li>
       <div class="d-flex justify-content  mx-5" style="height: 150px;">
-        <%= form_with model: @shoe, url: public_shoes_search_path, method: :get, local: true do |f| %>
+        <%= form_with url: public_shoes_search_path, method: :get, local: true do |f| %>
           <div class="input-group">
             <%= f.text_field :keyword, value: params[:keyword], class: "form-control search-control", placeholder: "シューズ名" %>
             <span class="input-group-btn input-group-append">
@@ -29,16 +29,16 @@
           </div>
         <% end %>
       </div>
-      <h1><%= @user.nick_name %>さんの投稿一覧</h1>
+      <h1 class="text-success"><%= @user.nick_name %>さんの投稿一覧</h1>
         <% if @shoes.present? %>
         <div class="d-flex justify-content-end">
-          <%= link_to '新着順', public_user_path(latest: "true", keyword: params[:keyword]), class: "border border-primary px-3" %>
-          <%= link_to '古い順', public_user_path(old: "true", keyword: params[:keyword]), class: "border border-primary px-3" %>
-          <%= link_to 'いいねが多い順', public_user_path(favorites: "true", keyword: params[:keyword]), class: "border border-primary" %>
+          <%= link_to '新着順', public_user_path(latest: "true"), class: "border border-primary px-3" %>
+          <%= link_to '古い順', public_user_path(old: "true"), class: "border border-primary px-3" %>
+          <%= link_to 'いいねが多い順', public_user_path(favorites: "true"), class: "border border-primary" %>
         </div>
-        <table class="table text-center">
+        <table class="table text-center border border-success">
           <thead>
-            <tr class="table-primary">
+            <tr class="bg-success text-white">
               <th>投稿日</th>
               <th>シューズ名</th>
               <th>評価</th>
@@ -58,16 +58,17 @@
                 <td>
                   <div id="post_raty-<%= shoe.id %>"></div>
                   <script>
-                    var elem = document.getElementById('post_raty-<%= shoe.id %>');
-                    var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    score: <%= shoe.evaluation %>,
-                    readOnly: true,
-                    };
-                    raty(elem,opt);
+                      var elem = document.getElementById('post_raty-<%= shoe.id %>');
+                      $('#post_raty-<%=shoe.id%>').empty();
+                      var opt = {
+                      starOn: "<%= asset_path('star-on.png') %>",
+                      starOff: "<%= asset_path('star-off.png') %>",
+                      starHalf: "<%= asset_path('star-half.png') %>",
+                      score: <%= shoe.evaluation %>,
+                      readOnly: true,
+                      };
+                      console.log(opt);
+                      raty(elem,opt);
                   </script>
                 </td>
                 <td><%= shoe.favorites.count %>いいね</td>
@@ -76,6 +77,7 @@
             </tbody>
           <% end %>
         </table>
+        <%= paginate @shoes %>
       <% else %>
         <h5><i class="fa-solid fa-comment-slash"></i>投稿はありません</h5>
       <% end %>

@@ -12,13 +12,17 @@ class Public::ShoesController < ApplicationController
   def index
     @user = current_user
     if params[:latest]
-      @shoes = Shoe.latest
+      @shoes = Shoe.page(params[:page]).latest
     elsif params[:old]
-      @shoes = Shoe.old
+      @shoes = Shoe.page(params[:page]).old
     elsif params[:favorites]
-      @shoes = Shoe.favorites
+      @shoe = Shoe.includes(:favorited_users).
+      sort_by {|x|
+        x.favorited_users.includes(:favorites).size
+      }.reverse
+      @shoes = Kaminari.paginate_array(@shoe).page(params[:page])
     else
-      @shoes = Shoe.all
+      @shoes = Shoe.page(params[:page])
     end
   end
 

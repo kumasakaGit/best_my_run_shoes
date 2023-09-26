@@ -1,10 +1,10 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-8 mt-5 mx-auto">
-<h2>会員一覧</h2>
-  <table class="table table-borderless">
-        <thead class="thead-light">
-          <tr>
+<h2 class="text-success">会員一覧</h2>
+      <table class="table text-center border border-success">
+        <thead>
+          <tr class="bg-success text-white">
             <th>会員ID</th>
             <th>氏名</th>
             <th>メールアドレス</th>
@@ -28,6 +28,7 @@
           <% end %>
         </tbody>
       </table>
+        <%= paginate @users %>
     </div>
   </div>
 </div>

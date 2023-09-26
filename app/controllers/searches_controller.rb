@@ -6,7 +6,10 @@ class SearchesController < ApplicationController
     elsif params[:old]
       @shoes = Shoe.old
     elsif params[:favorites]
-      @shoes = Shoe.favorites
+      @shoes = Shoe.includes(:favorited_users).
+      sort_by {|x|
+        x.favorited_users.includes(:favorites).size
+      }.reverse
     else
       @shoes = Shoe.all
     end

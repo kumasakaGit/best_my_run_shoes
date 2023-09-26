@@ -1,16 +1,16 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-8 mt-5 mx-auto">
-      <h1>検索結果</h1>
+      <h1 class="text-success">検索結果</h1>
       <%= render "search" %>
       <div class="d-flex justify-content-end">
         <%= link_to '新着順', search_path(latest: "true", keyword: params[:keyword]), class: "border border-primary px-3" %>
         <%= link_to '古い順', search_path(old: "true", keyword: params[:keyword]), class: "border border-primary px-3" %>
         <%= link_to 'いいねが多い順', search_path(favorites: "true", keyword: params[:keyword]), class: "border border-primary" %>
       </div>
-      <table class="table text-center">
+      <table class="table text-center border border-success">
         <thead>
-          <tr class="table-primary">
+          <tr class="bg-success text-white">
             <th>投稿日</th>
             <th>投稿者</th>
             <th>シューズ名</th>
@@ -36,16 +36,17 @@
             <td>
               <div id="post_raty-<%= shoe.id %>"></div>
               <script>
-                var elem = document.getElementById('post_raty-<%= shoe.id %>');
-                var opt = {
-                starOn: "<%= asset_path('star-on.png') %>",
-                starOff: "<%= asset_path('star-off.png') %>",
-                starHalf: "<%= asset_path('star-half.png') %>",
-                half: true,
-                score: <%= shoe.evaluation %>,
-                readOnly: true,
-                };
-                raty(elem,opt);
+                  var elem = document.getElementById('post_raty-<%= shoe.id %>');
+                  $('#post_raty-<%=shoe.id%>').empty();
+                  var opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  score: <%= shoe.evaluation %>,
+                  readOnly: true,
+                  };
+                  console.log(opt);
+                  raty(elem,opt);
               </script>
             </td>
             <td><%= shoe.favorites.count %>いいね</td>

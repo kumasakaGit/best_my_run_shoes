@@ -39,7 +39,7 @@
         <%= f.submit "編集", class: "btn btn-lg btn-block btn-success mt-3" %>
         <% end %>
       </div>
-      <%= link_to "アカウント削除", public_user_path(@user), class: "btn btn-danger mb-2 mr-2", method: :delete, "data-confirm" => "本当に退会しますか？" %>
+      <%= link_to "アカウント削除", admin_user_path(@user), class: "btn btn-danger mb-2 mr-2", method: :delete, "data-confirm" => "本当に退会しますか？" %>
     </div>
   </div>
 </div>

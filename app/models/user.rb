@@ -11,7 +11,11 @@ class User < ApplicationRecord
 
   enum gender: { man: 1, woman: 2, child: 3 }
   enum foot_width: { narrow: 1, nomal: 2, wide: 3 }
-  enum is_deleted: { active: false, unsubscribe: true }
+  
+  validates :nick_name, presence: true
+  validates :gender, presence: true
+  validates :foot_size, presence: true
+  validates :foot_width, presence: true
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|

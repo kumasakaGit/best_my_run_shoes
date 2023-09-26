@@ -1,15 +1,16 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-8 mt-5 mx-auto">
-      <h1>レビュー覧</h1>
-      <div class="d-flex justify-content-end">
+      <h1 class="text-success">レビュー覧</h1>
+      <%= render "searches/search" %>
+      <div class="d-flex justify-content-end mt-2">
         <%= link_to '新着順', admin_shoes_path(latest: "true"), class: "border border-primary px-3" %>
         <%= link_to '古い順', admin_shoes_path(old: "true"), class: "border border-primary px-3" %>
         <%= link_to 'いいねが多い順', admin_shoes_path(favorites: "true"), class: "border border-primary px-3" %>
       </div>
-      <table class="table text-center">
+      <table class="table text-center border border-success">
         <thead>
-          <tr class="table-primary">
+          <tr class="bg-success text-white">
             <th>投稿日</th>
             <th>投稿者</th>
             <th>シューズ名</th>
@@ -35,14 +36,15 @@
             <td id="post_raty-<%= shoe.id %>">
               <script>
                 var elem = document.getElementById('post_raty-<%= shoe.id %>');
+                $('#post_raty-<%=shoe.id%>').empty();
                 var opt = {
                 starOn: "<%= asset_path('star-on.png') %>",
                 starOff: "<%= asset_path('star-off.png') %>",
                 starHalf: "<%= asset_path('star-half.png') %>",
-                half: true,
                 score: <%= shoe.evaluation %>,
                 readOnly: true,
                 };
+                console.log(opt);
                 raty(elem,opt);
               </script>
             </td>
@@ -52,6 +54,7 @@
         </tbody>
         <% end %>
       </table>
+        <%= paginate @shoes %>
     </div>
   </div>
 </div>

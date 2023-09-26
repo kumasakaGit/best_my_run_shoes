@@ -5,15 +5,17 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if params[:latest]
-      @shoes = Shoe.where(user_id:params[:id]).latest
+      @shoes = @user.shoes.page(params[:page]).latest
     elsif params[:old]
-      @shoes = Shoe.where(user_id:params[:id]).old
+      @shoes = @user.shoes.page(params[:page]).old
     elsif params[:favorites]
-      p "#############"
-      @shoes = Shoe.where(user_id:params[:id]).favorites
-      p @shoes
+      shoes = @user.shoes.includes(:favorited_users).
+      sort_by {|x|
+        x.favorited_users.includes(:favorites).size
+      }.reverse
+      @shoes = Kaminari.paginate_array(shoes).page(params[:page])
     else
-      @shoes = Shoe.where(user_id:params[:id])
+      @shoes = @user.shoes.page(params[:page])
     end
   end
 
@@ -31,7 +33,7 @@ class Public::UsersController < ApplicationController
       flash[:notice] = "編集完了しました"
       redirect_to public_user_path(@user.id)
     else
-      render :edit
+      redirect_to edit_public_user_path, alert: '編集に失敗しました。空欄等が無いか確認してください。'
     end
   end
 

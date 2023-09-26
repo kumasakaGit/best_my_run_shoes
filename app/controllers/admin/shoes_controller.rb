@@ -1,6 +1,18 @@
 class Admin::ShoesController < ApplicationController
   def index
-    @shoes = Shoe.all
+    if params[:latest]
+      @shoes = Shoe.page(params[:page]).latest
+    elsif params[:old]
+      @shoes = Shoe.page(params[:page]).old
+    elsif params[:favorites]
+      @shoe = Shoe.includes(:favorited_users).
+      sort_by {|x|
+        x.favorited_users.includes(:favorites).size
+      }.reverse
+      @shoes = Kaminari.paginate_array(@shoe).page(params[:page])
+    else
+      @shoes = Shoe.page(params[:page])
+    end
   end
 
   def show
