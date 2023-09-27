@@ -1,4 +1,4 @@
-# ベストマイランシューズ
+# ベストマイシューズ
 ​
 ## サイト概要
 ### サイトテーマ
@@ -19,7 +19,8 @@
 ・自分がオススメするシューズを投稿する時
 ​
 ## 設計書
-後ほど作成予定
+・google ドライブ(ER図、テーブル定義書、画面遷移図、ワイヤーフレーム、WBS、詳細設計)
+- https://drive.google.com/drive/folders/143-DSMPKeqaBF1CFOFHMuUnwTi7cFHlq?usp=drive_link
 ​
 ## 開発環境
 - OS：Linux(CentOS)
@@ -30,4 +31,3 @@
 ​
 ## 使用素材
 - Supported by Rakuten Developers
-折りたたむ
