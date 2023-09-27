@@ -1,4 +1,4 @@
-  <div class="d-flex justify-content-end">
+<div class="d-flex justify-content-end">
   <%= form_with url: search_path, local: true, method: :get do |f| %>
     <div class="input-group">
       <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "キーワードを入力" %>
@@ -9,5 +9,5 @@
         </span>
     </div>
   <% end %>
-  </div>
+</div>
 

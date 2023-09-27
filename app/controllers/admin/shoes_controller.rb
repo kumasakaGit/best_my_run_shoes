@@ -5,11 +5,11 @@ class Admin::ShoesController < ApplicationController
     elsif params[:old]
       @shoes = Shoe.page(params[:page]).old
     elsif params[:favorites]
-      @shoe = Shoe.includes(:favorited_users).
+      shoes = Shoe.includes(:favorited_users).
       sort_by {|x|
         x.favorited_users.includes(:favorites).size
       }.reverse
-      @shoes = Kaminari.paginate_array(@shoe).page(params[:page])
+      @shoes = Kaminari.paginate_array(shoes).page(params[:page])
     else
       @shoes = Shoe.page(params[:page])
     end

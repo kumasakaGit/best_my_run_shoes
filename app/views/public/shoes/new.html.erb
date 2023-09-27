@@ -4,29 +4,29 @@
             <%= render "public/users/sidebar", user: @user %>
         </div>
         <div class="col-md-8 mt-5 ml-3">
-            <h1>ランニングシューズを投稿する</h1>
+            <h1 class="text-success">ランニングシューズを投稿する</h1>
             <%= form_with model: @shoe, url: public_shoes_path, local: true do |f| %>
-            <%= f.hidden_field :photo_image_url, :value => @image_url %>
-            <%= f.hidden_field :rakuten_shoes_url, :value => @shoe_url %>
-            <table class="table table-borderless">
-                <tr>
-                    <td><%= image_tag @image_url %></td>
-                </tr>
-                <tr>
-                    <td><%= f.text_field :name, autofocus: true, placeholder: "シューズ名" %></td>
-                </tr>
-                <tr>
-                    <td><%= f.text_area :comment, size: "50x5", placeholder: "コメント例：ワイドタイプで足幅が広い人にオススメです！" %></td>
-                </tr>
-                <tr>
-                    <td>
-                        <%= f.label :evaluation,'評価：', class:'star-title' %><span id='post_raty'></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><%= f.submit "投稿", class:"btn btn-lg btn-info px-5" %></td>
-                </tr>
-            </table>
+                <%= f.hidden_field :photo_image_url, :value => @image_url %>
+                <%= f.hidden_field :rakuten_shoes_url, :value => @shoe_url %>
+                <table class="table table-borderless">
+                    <tr>
+                        <td><%= image_tag @image_url %></td>
+                    </tr>
+                    <tr>
+                        <td><%= f.text_field :name, autofocus: true, placeholder: "シューズ名" %></td>
+                    </tr>
+                    <tr>
+                        <td><%= f.text_area :comment, size: "50x5", placeholder: "コメント例：ワイドタイプで足幅が広い人にオススメです！" %></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <%= f.label :evaluation,'評価：', class:'star-title' %><span id='post_raty'></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><%= f.submit "投稿", class:"btn btn-lg btn-info px-5" %></td>
+                    </tr>
+                </table>
             <% end %>
             <script>
                 var elem = document.getElementById('post_raty');

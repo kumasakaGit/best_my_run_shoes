@@ -1,7 +1,7 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-8 mt-5 mx-auto">
-<h2 class="text-success">会員一覧</h2>
+      <h2 class="text-success">会員一覧</h2>
       <table class="table text-center border border-success">
         <thead>
           <tr class="bg-success text-white">
@@ -17,7 +17,7 @@
             <td><%= user.id %></td>
             <td>
               <%= link_to admin_user_path(user.id), class: "text-dark" do %>
-              <%= user.nick_name %>
+                <%= user.nick_name %>
               <% end %>
             </td>
             <td><%= user.email %></td>
@@ -28,7 +28,7 @@
           <% end %>
         </tbody>
       </table>
-        <%= paginate @users %>
+      <%= paginate @users %>
     </div>
   </div>
 </div>

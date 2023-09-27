@@ -58,18 +58,18 @@
           <td>
             <div>
               <% @shoe.comments.each do |comment| %>
-              <table class="table">
-                <tr>
-                  <td>
-                    <%= comment.created_at.strftime('%Y/%m/%d') %>
-                    <%= comment.user.nick_name %>
-                    <%= link_to "削除", admin_shoe_comment_path(comment.shoe, comment), method: :delete, class: "btn btn-outline-danger" %>
-                  </td>
-                </tr>
+                <table class="table">
+                  <tr>
+                    <td>
+                      <%= comment.created_at.strftime('%Y/%m/%d') %>
+                      <%= comment.user.nick_name %>
+                      <%= link_to "削除", admin_shoe_comment_path(comment.shoe, comment), method: :delete, class: "btn btn-outline-danger" %>
+                    </td>
+                  </tr>
                   <tr class=" border">
                     <td><%= comment.comment_content %></td>
                   </tr>
-              </table>
+                </table>
               <% end %>
             </div>
           </td>
