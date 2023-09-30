@@ -3,7 +3,7 @@
         <div class="col-md-10 mt-5 mx-auto">
             <h1 class="text-success">シューズ名を入力して検索</h1>
             <div class="d-flex justify-content mx-5 mb-3">
-                <%= form_with model: @shoe, url: public_shoes_search_path, method: :get, local: true do |f| %>
+                <%= form_with url: public_shoes_search_path, method: :get, local: true do |f| %>
                     <div class="input-group">
                         <%= f.text_field :keyword, value: params[:keyword], class: "form-control search-control", placeholder: "シューズ名" %>
                         <span class="input-group-btn input-group-append">
@@ -30,8 +30,6 @@
                     </tr>
                 </table>
             <% end %>
-            <% else %>
-            <h4>キーワードを入力してください</h4>
             <% end %>
         </div>
     </div>

@@ -16,11 +16,11 @@ class Public::ShoesController < ApplicationController
     elsif params[:old]
       @shoes = Shoe.page(params[:page]).old
     elsif params[:favorites]
-      @shoe = Shoe.includes(:favorited_users).
+      shoes = Shoe.includes(:favorited_users).
       sort_by {|x|
         x.favorited_users.includes(:favorites).size
       }.reverse
-      @shoes = Kaminari.paginate_array(@shoe).page(params[:page])
+      @shoes = Kaminari.paginate_array(shoes).page(params[:page])
     else
       @shoes = Shoe.page(params[:page])
     end
@@ -71,9 +71,17 @@ class Public::ShoesController < ApplicationController
 
   def search
     @shoe = Shoe
-    if params[:keyword]
+    return unless params[:keyword]
+    unless params[:keyword].empty?
       @shoes = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
-      
+    else
+      path = Rails.application.routes.recognize_path(request.referer)
+      if path[:controller] == "public/users" && path[:action] == "show"
+        flash[:alert] = 'no keyword'
+        redirect_to request.referer
+      else
+        flash.now[:alert] = 'no keyword'
+      end
     end
   end
 
