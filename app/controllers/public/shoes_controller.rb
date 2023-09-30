@@ -73,6 +73,7 @@ class Public::ShoesController < ApplicationController
     @shoe = Shoe
     if params[:keyword]
       @shoes = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
+      
     end
   end
 

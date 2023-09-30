@@ -18,6 +18,8 @@ class SearchesController < ApplicationController
       @shoes = @shoes.select{|shoe| shoe.name.include?(params[:keyword]) }
     elsif params[:keyword]
       @shoes = @shoes.search(params[:keyword])
+    elsif params[:keyword] = 0
+      @shoes = Shoe.all
     end
     @keyword = params[:keyword]
   end
