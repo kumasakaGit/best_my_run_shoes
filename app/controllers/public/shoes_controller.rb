@@ -77,10 +77,10 @@ class Public::ShoesController < ApplicationController
     else
       path = Rails.application.routes.recognize_path(request.referer)
       if path[:controller] == "public/users" && path[:action] == "show"
-        flash[:alert] = 'no keyword'
+        flash[:alert] = 'キーワードを入力してください'
         redirect_to request.referer
       else
-        flash.now[:alert] = 'no keyword'
+        flash.now[:alert] = 'キーワードを入力してください'
       end
     end
   end
