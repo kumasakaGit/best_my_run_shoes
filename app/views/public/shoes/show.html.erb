@@ -52,21 +52,27 @@
           </td>
         </tr>
         <tr>
-          <td>
-            <% if @shoe.favorited_by?(current_user) %>
-              <p>
-                <%= link_to public_shoe_favorites_path(@shoe), method: :delete, class: "text-dark" do %>
-                  ♥<%= @shoe.favorites.count %> いいね
-                <% end %>
-              </p>
-              <% else %>
-              <p>
-                <%= link_to public_shoe_favorites_path(@shoe), method: :post, class: "text-dark" do %>
-                  ♡<%= @shoe.favorites.count %> いいね
-                <% end %>
-              </p>
-            <% end %>
-          </td>
+          <% if user_signed_in? %>
+            <td>
+              <% if @shoe.favorited_by?(current_user) %>
+                <p>
+                  <%= link_to public_shoe_favorites_path(@shoe), method: :delete, class: "text-dark" do %>
+                    ♥<%= @shoe.favorites.count %> いいね
+                  <% end %>
+                </p>
+                <% else %>
+                <p>
+                  <%= link_to public_shoe_favorites_path(@shoe), method: :post, class: "text-dark" do %>
+                    ♡<%= @shoe.favorites.count %> いいね
+                  <% end %>
+                </p>
+              <% end %>
+            </td>
+          <% else %>
+            <td>
+              <p>♥<%= @shoe.favorites.count %> いいね</p>
+            </td>
+          <% end %>
         </tr>
         <tr>
           <td>コメント件数：<%= @shoe.comments.count %></td>
@@ -91,12 +97,14 @@
                 </table>
               <% end %>
             </div>
-            <div>
-              <%= form_with model: [@shoe, @comment], url: public_shoe_comments_path(@shoe.id) do |f| %>
-                <%= f.text_area :comment_content, rows: '5', placeholder: "コメントをここに" %>
-                <%= f.submit "送信する" %>
-              <% end %>
-            </div>
+            <% if user_signed_in? %>
+              <div>
+                <%= form_with model: [@shoe, @comment], url: public_shoe_comments_path(@shoe.id) do |f| %>
+                  <%= f.text_area :comment_content, rows: '5', placeholder: "コメントをここに" %>
+                  <%= f.submit "送信する" %>
+                <% end %>
+              </div>
+            <% end %>
           </td>
         </tr>
       </table>
